@@ -1,0 +1,32 @@
+@use 'var' as v;
+@mixin flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+@mixin stateBtn($border: unset, $hBorder: unset){
+    background-color: v.$Neutral-0;
+    display: block;
+    color: v.$Neutral-900;
+    border: $border;
+    padding: .5rem 1rem;
+    border-radius: 17px;
+    transition: all .3s ease-in-out;
+        &:hover{
+            background-color: v.$Red-500;
+            color: v.$Neutral-100;
+            cursor: pointer;
+            border: $hBorder;
+        }
+        &:active{
+            background-color: v.$Red-500;
+            color: v.$Neutral-100;
+        }
+        &:focus{
+            border: 1px solid v.$Red-700;
+        }
+}
+@mixin stateActive{
+    background-color: v.$Red-500;
+    color: v.$Neutral-100;
+}

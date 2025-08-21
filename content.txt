@@ -1,0 +1,101 @@
+  Extensions List
+
+  All
+  Active
+  Inactive
+
+
+  DevLens
+  Quickly inspect page layouts and visualize element boundaries.
+  Remove
+
+  StyleSpy
+  Instantly analyze and copy CSS from any webpage element.
+  Remove
+
+  SpeedBoost
+  Optimizes browser resource usage to accelerate page loading.
+  Remove
+
+  JSONWizard
+  Formats, validates, and prettifies JSON responses in-browser.
+  Remove
+
+  TabMaster Pro
+  Organizes browser tabs into groups and sessions.
+  Remove
+
+  ViewportBuddy
+  Simulates various screen resolutions directly within the browser.
+  Remove
+
+  Markup Notes
+  Enables annotation and notes directly onto webpages for collaborative debugging.
+  Remove
+
+  GridGuides
+  Overlay customizable grids and alignment guides on any webpage.
+  Remove
+
+  Palette Picker
+  Instantly extracts color palettes from any webpage.
+  Remove
+
+  LinkChecker
+  Scans and highlights broken links on any page.
+  Remove
+
+  DOM Snapshot
+  Capture and export DOM structures quickly.
+  Remove
+
+  ConsolePlus
+  Enhanced developer console with advanced filtering and logging.
+  Remove
+
+
+
+  switch icon and animation
+<style>
+    *{
+      box-sizing: border-box;
+    }
+    body{
+      background-color: black;
+    }
+    .switch-container{
+      height: 5rem;
+      width: 10rem;
+      background-color: wheat;
+      border-radius: 40px;
+      border: 1px solid wheat;
+      overflow: hidden;
+      position: relative;
+      transition: background-color 0.5s ease;
+      cursor: pointer;
+    }
+    .switch{
+      height: inherit;
+      width: 5rem;
+      background-color: white;
+      border-radius: inherit;
+      transform: translateX(0);
+      transition: transform 0.5s ease;
+    }
+    .switch-container.toggle{
+      background-color: red;
+      border: 1px solid red;
+    }
+    .switch-container.toggle .switch{
+      transform: translateX(calc(10rem - 5rem));
+
+    }
+  </style>
+  <div class="switch-container">
+    <div class="switch" ></div>
+  </div>
+  const switchBtn = document.querySelector('.switch');
+    const switchContainer = document.querySelector('.switch-container');
+    switchContainer.addEventListener('click', ()=>{
+      switchContainer.classList.toggle('toggle');
+    })

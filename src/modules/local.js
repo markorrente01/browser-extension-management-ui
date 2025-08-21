@@ -1,6 +1,6 @@
 export async function getData() {
     try {
-        const data = await fetch('data.json');
+        const data = await fetch('./data.json');
         const response = await data.json();
         return response;
     } catch (error) {

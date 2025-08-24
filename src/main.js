@@ -109,7 +109,7 @@ import { toggleManager } from "./modules/mode.js";
             if (toggleItems) {
                 toggleItems.isActive = !toggleItems.isActive;
                 this.dataManager.saveData(allItems);
-                this.renderFilteredItems('.states.state-active')
+                this.renderFilteredItems(document.querySelector('.states.state-active'));
             }
         }
     }
@@ -121,4 +121,4 @@ import { toggleManager } from "./modules/mode.js";
     ui.renderFilteredItems(ui.elements.showAll)
     dataManager.initialize()
     dataManager.getData()
-    // toggleManager()
+    toggleManager()

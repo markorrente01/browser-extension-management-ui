@@ -4,29 +4,30 @@
     justify-content: space-between;
     align-items: center;
 }
-@mixin stateBtn($border: unset, $hBorder: unset){
-    background-color: v.$Neutral-0;
+@mixin stateBtn($border: unset, $hBorder: unset, $color: unset, 
+$hcolor: unset,  $bg-color: unset, $hbg-color: unset, $focus: unset){
+    background-color: $bg-color;
     display: block;
-    color: v.$Neutral-900;
+    color: $color;
     border: $border;
     padding: .5rem 1rem;
     border-radius: 17px;
     transition: all .3s ease-in-out;
         &:hover{
-            background-color: v.$Red-500;
-            color: v.$Neutral-100;
+            background-color: $hbg-color;
+            color: $hcolor;
             cursor: pointer;
             border: $hBorder;
         }
         &:active{
-            background-color: v.$Red-500;
-            color: v.$Neutral-100;
+            background-color: $hbg-color;
+            color: $hcolor;
         }
         &:focus{
-            border: 1px solid v.$Red-700;
+            border: 1px solid $focus;
         }
 }
-@mixin stateActive{
+@mixin stateActive($color: unset){
     background-color: v.$Red-500;
-    color: v.$Neutral-100;
+    color: $color;
 }

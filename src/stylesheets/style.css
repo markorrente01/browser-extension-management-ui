@@ -1,4 +1,38 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+  --bg: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+  --text: hsl(227, 75%, 14%);
+  --surface: hsl(200, 60%, 99%);
+  --surface-alt: hsl(0, 0%, 93%);
+  --border: hsl(0, 0%, 78%);
+  --button-text: hsl(227, 75%, 14%);
+  --danger: hsl(3, 71%, 56%);
+  --danger-hover: hsl(3, 77%, 44%);
+  --nav-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 8px 16px rgba(0, 0, 0, 0.06);
+  --toggle-bg: hsl(0, 0%, 78%);
+  --toggle-knob: hsl(200, 60%, 99%);
+  --logo: url(/public/images/logo.svg);
+}
+
+[data-theme=dark] {
+  --bg: linear-gradient(180deg, #040918 0%, #091540 100%);
+  --text: hsl(200, 60%, 99%);
+  --surface: hsl(226, 25%, 17%);
+  --surface-alt: hsl(225, 23%, 24%);
+  --border: hsl(226, 11%, 37%);
+  --button-text: hsl(200, 60%, 99%);
+  --danger: hsl(3, 86%, 64%);
+  --danger-hover: hsl(3, 71%, 56%);
+  --nav-shadow: none;
+  --toggle-bg: hsl(3, 71%, 56%);
+  --toggle-knob: hsl(227, 75%, 14%);
+  --logo: url(/public/images/logo-darkmode.svg);
+}
+
+#logo {
+  content: var(--logo);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -21,19 +55,19 @@ img {
 }
 
 body {
-  background: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+  background: var(--bg);
   min-height: 100vh;
-  color: hsl(227, 75%, 14%);
+  color: var(--text);
   margin-bottom: 2.5rem;
 }
 
 nav {
   border-radius: 10px;
-  background-color: hsl(200, 60%, 99%);
+  background-color: var(--surface);
   max-width: 80%;
   margin: 3.5rem auto;
   padding: 0.5rem 0.8rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 8px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--nav-shadow);
 }
 
 .nav-container {
@@ -47,7 +81,7 @@ nav {
   cursor: pointer;
   padding: 1.6rem 1.6rem;
   border-radius: 12px;
-  background-color: hsl(0, 0%, 93%);
+  background-color: var(--surface-alt);
   position: relative;
 }
 .nav-container-item2 img {
@@ -56,11 +90,14 @@ nav {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: opacity, transform 0.4s ease-in-out;
+  transition: opacity, transform 0.8s ease-in-out;
+}
+
+.nav-container-item2 {
+  opacity: 1;
 }
 
 .nav-container-item2.light {
-  background-color: hsl(227, 75%, 14%);
   transition: background-color 0.4s ease-in-out;
 }
 
@@ -68,21 +105,21 @@ nav {
   transition: background-color 0.4s ease-in-out;
 }
 
-.nav-container-item2.dark .light-icon {
+.nav-container-item2.dark .dark-icon {
   opacity: 0;
 }
 
-.nav-container-item2.dark .dark-icon {
+.nav-container-item2.dark .light-icon {
   opacity: 1;
 }
 
 .nav-container-item2.light .dark-icon {
-  opacity: 0;
+  opacity: 1;
 }
 
 .nav-container-item2.light .light-icon {
-  opacity: 1;
-  transform: translate(-50%, -50%) rotate(200deg);
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(360deg);
   transform-origin: center center;
 }
 
@@ -102,7 +139,7 @@ main {
   font-size: 1.75rem;
   font-weight: 700;
   display: block;
-  color: hsl(227, 75%, 14%);
+  color: var(--text);
 }
 
 .sub-nav-states {
@@ -112,77 +149,77 @@ main {
 }
 
 .all {
-  background-color: hsl(200, 60%, 99%);
+  background-color: var(--surface);
   display: block;
-  color: hsl(227, 75%, 14%);
+  color: var(--text);
   border: unset;
   padding: 0.5rem 1rem;
   border-radius: 17px;
   transition: all 0.3s ease-in-out;
 }
 .all:hover {
-  background-color: hsl(3, 71%, 56%);
-  color: hsl(0, 0%, 93%);
+  background-color: var(--danger);
+  color: var(--surface-alt);
   cursor: pointer;
   border: unset;
 }
 .all:active {
-  background-color: hsl(3, 71%, 56%);
-  color: hsl(0, 0%, 93%);
+  background-color: var(--danger);
+  color: var(--surface-alt);
 }
 .all:focus {
-  border: 1px solid hsl(3, 77%, 44%);
+  border: 1px solid var(--danger-hover);
 }
 
 .active {
-  background-color: hsl(200, 60%, 99%);
+  background-color: var(--surface);
   display: block;
-  color: hsl(227, 75%, 14%);
+  color: var(--text);
   border: unset;
   padding: 0.5rem 1rem;
   border-radius: 17px;
   transition: all 0.3s ease-in-out;
 }
 .active:hover {
-  background-color: hsl(3, 71%, 56%);
-  color: hsl(0, 0%, 93%);
+  background-color: var(--danger);
+  color: var(--surface-alt);
   cursor: pointer;
   border: unset;
 }
 .active:active {
-  background-color: hsl(3, 71%, 56%);
-  color: hsl(0, 0%, 93%);
+  background-color: var(--danger);
+  color: var(--surface-alt);
 }
 .active:focus {
-  border: 1px solid hsl(3, 77%, 44%);
+  border: 1px solid var(--danger-hover);
 }
 
 .inactive {
-  background-color: hsl(200, 60%, 99%);
+  background-color: var(--surface);
   display: block;
-  color: hsl(227, 75%, 14%);
+  color: var(--text);
   border: unset;
   padding: 0.5rem 1rem;
   border-radius: 17px;
   transition: all 0.3s ease-in-out;
 }
 .inactive:hover {
-  background-color: hsl(3, 71%, 56%);
-  color: hsl(0, 0%, 93%);
+  background-color: var(--danger);
+  color: var(--surface-alt);
   cursor: pointer;
   border: unset;
 }
 .inactive:active {
-  background-color: hsl(3, 71%, 56%);
-  color: hsl(0, 0%, 93%);
+  background-color: var(--danger);
+  color: var(--surface-alt);
 }
 .inactive:focus {
-  border: 1px solid hsl(3, 77%, 44%);
+  border: 1px solid var(--danger-hover);
 }
 
 .states.state-active {
   background-color: hsl(3, 71%, 56%);
-  color: hsl(0, 0%, 93%);
+  color: var(--surface-alt);
 }
 
 .ext-grid-container {
@@ -194,13 +231,13 @@ main {
 
 .ext-grid-item {
   border-radius: 17px;
-  background-color: hsl(200, 60%, 99%);
+  background-color: var(--surface);
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
   padding: 1.2rem 1rem;
   padding-bottom: 0.8rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 8px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--nav-shadow);
 }
 
 .ext-info {
@@ -215,26 +252,46 @@ main {
 .ext-actions button {
   display: block;
   font-weight: 700;
-  background-color: hsl(200, 60%, 99%);
+  background-color: unset;
   display: block;
-  color: hsl(227, 75%, 14%);
-  border: 1px solid hsl(227, 75%, 14%);
+  color: unset;
+  border: unset;
+  padding: 0.5rem 1rem;
+  border-radius: 17px;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--surface);
+  display: block;
+  color: var(--text);
+  border: 1px solid var(--button-text);
   padding: 0.5rem 1rem;
   border-radius: 17px;
   transition: all 0.3s ease-in-out;
 }
 .ext-actions button:hover {
-  background-color: hsl(3, 71%, 56%);
-  color: hsl(0, 0%, 93%);
+  background-color: unset;
+  color: unset;
   cursor: pointer;
-  border: 1px solid hsl(3, 71%, 56%);
+  border: unset;
 }
 .ext-actions button:active {
-  background-color: hsl(3, 71%, 56%);
-  color: hsl(0, 0%, 93%);
+  background-color: unset;
+  color: unset;
 }
 .ext-actions button:focus {
-  border: 1px solid hsl(3, 77%, 44%);
+  border: 1px solid unset;
+}
+.ext-actions button:hover {
+  background-color: var(--danger);
+  color: var(--surface-alt);
+  cursor: pointer;
+  border: 1px solid var(--danger);
+}
+.ext-actions button:active {
+  background-color: var(--danger);
+  color: var(--surface-alt);
+}
+.ext-actions button:focus {
+  border: 1px solid var(--danger-hover);
 }
 
 .ext-title {

@@ -1,6 +1,37 @@
 @use 'var' as v;
 @import 'mixin';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    --bg: #{v.$Light-Gradient};
+    --text: #{v.$Neutral-900};
+    --surface: #{v.$Neutral-0};
+    --surface-alt: #{v.$Neutral-100};
+    --border: #{v.$Neutral-300};
+    --button-text: #{v.$Neutral-900};
+    --danger: #{v.$Red-500};
+    --danger-hover: #{v.$Red-700};
+    --nav-shadow: #{v.$nav-shadow};
+    --toggle-bg: #{v.$Neutral-300};
+    --toggle-knob: #{v.$Neutral-0};
+    --logo: url(/public/images/logo.svg);
+}
+[data-theme="dark"]{
+    --bg: #{v.$Dark-Gradient};
+    --text: #{v.$Neutral-0};
+    --surface: #{v.$Neutral-800};
+    --surface-alt: #{v.$Neutral-700};
+    --border: #{v.$Neutral-600};
+    --button-text: #{v.$Neutral-0};
+    --danger: #{v.$Red-400};
+    --danger-hover: #{v.$Red-500};
+    --nav-shadow: none;
+    --toggle-bg: #{v.$Red-500};
+    --toggle-knob: #{v.$Neutral-900};
+    --logo: url(/public/images/logo-darkmode.svg);
+}
+#logo{
+    content: var(--logo);
+}
 *{
     padding: 0;
     margin: 0;
@@ -19,18 +50,18 @@ img{
     display: block;
 }
 body{
-    background: v.$Light-Gradient;
+    background: var(--bg);
     min-height: 100vh;
-    color: v.$Neutral-900;
+    color: var(--text);
     margin-bottom: 2.5rem;
 }
 nav{
     border-radius: 10px;
-    background-color: v.$Neutral-0;
+    background-color: var(--surface);
     max-width: 80%;
     margin: 3.5rem auto;
     padding: .5rem .8rem;
-    box-shadow: v.$nav-shadow;
+    box-shadow: var(--nav-shadow);
 }
 .nav-container{
    @include flex;
@@ -38,43 +69,43 @@ nav{
 }
 .nav-container-item2{
     cursor: pointer;
-    // border: 1px solid v.$Red-400;
     padding: 1.6rem 1.6rem;
     border-radius: 12px;
-    background-color: v.$Neutral-100;
+    background-color: var(--surface-alt);
     position: relative;
         img{
             width: 25px;
-            // border: 1px solid v.$Red-400;
             position: absolute;
             top: 50%;
             left: 50%;
             -webkit-transform: translate(-50%, -50%);
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
-            transition: opacity, transform .4s ease-in-out;
+            transition: opacity, transform .8s ease-in-out;
         }
 }
+.nav-container-item2{
+    opacity: 1;
+}
 .nav-container-item2.light{
-    background-color: v.$Neutral-900;
     transition: background-color .4s ease-in-out;
 }
 .nav-container-item2.dark{
     transition: background-color .4s ease-in-out;
 
 }
-.nav-container-item2.dark .light-icon{
+.nav-container-item2.dark .dark-icon{
     opacity: 0;
 }
-.nav-container-item2.dark .dark-icon{
+.nav-container-item2.dark .light-icon{
     opacity: 1;
 }
 .nav-container-item2.light .dark-icon{
-    opacity: 0;
+    opacity: 1;
 }
 .nav-container-item2.light .light-icon{
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(200deg);
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(360deg);
     transform-origin: center center;
 }
 main{
@@ -82,7 +113,6 @@ main{
     margin: auto;
 }
 .sub-nav{
-    // border: 1px solid black;
     @include flex;
     margin-bottom: 2rem;
 }
@@ -90,7 +120,7 @@ main{
     font-size: 1.75rem;
     font-weight: 700;
     display: block;
-    color: v.$Neutral-900;
+    color: var(--text);
 }
 .sub-nav-states{
     display: flex;
@@ -98,16 +128,19 @@ main{
     gap: 1rem;
 }
 .all{
-   @include stateBtn;
+   @include stateBtn(unset, unset, var(--text), var(--surface-alt), 
+        var(--surface), var(--danger), var(--danger-hover));
 }
 .active{
-    @include stateBtn;
+    @include stateBtn(unset, unset, var(--text), var(--surface-alt), 
+        var(--surface), var(--danger), var(--danger-hover));
 }
 .inactive{
-    @include stateBtn;
+    @include stateBtn(unset, unset, var(--text), var(--surface-alt), 
+        var(--surface), var(--danger), var(--danger-hover));
 }
 .states.state-active{
-    @include stateActive;
+    @include stateActive(var(--surface-alt));
 }
 .ext-grid-container{
     width: 100%;
@@ -117,13 +150,13 @@ main{
 }
 .ext-grid-item{
     border-radius: 17px;
-    background-color: v.$Neutral-0;
+    background-color: var(--surface);
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
     padding: 1.2rem 1rem;
     padding-bottom: .8rem;
-    box-shadow: v.$nav-shadow
+    box-shadow: var(--nav-shadow);
 }
 .ext-info{
     display: flex;
@@ -135,7 +168,9 @@ main{
         button{
             display: block;
             font-weight: 700;
-            @include stateBtn(1px solid v.$Neutral-900, 1px solid v.$Red-500);
+            @include stateBtn();
+            @include stateBtn(1px solid var(--button-text), 1px solid var(--danger), var(--text), var(--surface-alt), 
+                var(--surface), var(--danger), var(--danger-hover));
         }
 }
 .ext-title{
@@ -163,7 +198,7 @@ main{
     transition: all 0.5s ease;
     cursor: pointer;
     margin-top: 1rem;
-    box-shadow: v.$inset-main
+    box-shadow: v.$inset-main;
 }
 .switch{
     height: 18px;

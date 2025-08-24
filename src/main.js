@@ -1,5 +1,6 @@
 import { getData } from "./modules/local.js";
 import { toggleManager } from "./modules/mode.js";
+localStorage.clear();
     const initialData = await getData();
     function DataManager(key, testData) {
         this.key = key;

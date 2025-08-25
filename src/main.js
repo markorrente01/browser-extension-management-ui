@@ -67,11 +67,9 @@ import { toggleManager } from "./modules/mode.js";
                                 this.setFilterBtnActive(this.elements.showAll);
                                 this.renderFilteredItems(this.elements.showAll);
                             } else if(target.classList.contains('remove-btn')){
-                                this.remove(target.dataset.id)
-                                console.log(target.dataset.id)
+                                this.remove(target.dataset.id);
                             } else if(target.classList.contains('switch-container')){
-                                this.toggleState(target.dataset.id)
-                                console.log(target.dataset.id);
+                                this.toggleState(target.dataset.id);
                             }
                         break;
                 
@@ -153,31 +151,7 @@ import { toggleManager } from "./modules/mode.js";
                 this.dataManager.saveData(allItems);
                 this.renderFilteredItems(document.querySelector('.states.state-active'));
             }
-        },
-        // handleModes: function() {
-        //     const toggleMode = document.getElementById('mode');
-        //     const root = document.documentElement;
-        //     function toggleManager() {
-        //         let theme = localStorage.getItem('theme');
-        //         if (!theme) {
-        //             theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        //         } root.setAttribute('data-theme', theme);
-        //         toggleMode.classList.add(theme)
-        //         localStorage.setItem('theme', theme)
-
-        //         toggleMode.addEventListener('click', ()=>{
-        //             const curr = root.getAttribute('data-theme');
-        //             const next = curr === 'dark' ? 'light' : 'dark';
-        //             const classToggle = next === 'dark' ? 'dark' : 'light';
-        //             root.setAttribute('data-theme', next);
-        //             localStorage.setItem('theme', next)
-
-        //             toggleMode.classList.remove('dark', 'light');
-        //             toggleMode.classList.add(classToggle);
-        //         })
-        //     }
-
-        // }
+        }
     }
     const dataManager = new DataManager('uiData', initialData);
     const uiManager = new UiManager(dataManager);
@@ -186,4 +160,3 @@ import { toggleManager } from "./modules/mode.js";
     uiManager.keyboardNav();
     uiManager.renderFilteredItems(uiManager.elements.showAll);
     toggleManager()
-    // uiManager.handleModes();

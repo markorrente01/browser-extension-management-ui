@@ -343,6 +343,12 @@ main {
   transform: translateX(20px);
 }
 
+.tabItem:focus-visible {
+  outline: 2px solid hsl(3, 71%, 56%);
+  outline-offset: 2px;
+  border: none;
+}
+
 @media screen and (max-width: 1024px) {
   .ext-grid-container {
     grid-template-columns: auto auto;

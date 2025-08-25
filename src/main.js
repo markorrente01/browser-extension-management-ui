@@ -1,6 +1,5 @@
 import { getData } from "./modules/local.js";
 import { toggleManager } from "./modules/mode.js";
-localStorage.clear();
     const initialData = await getData();
     function DataManager(key, testData) {
         this.key = key;
@@ -31,10 +30,10 @@ localStorage.clear();
             this.elements.activeBtn,
             this.elements.inactiveBtn,
             this.elements.showAll
-        ]
+        ];
     }
     UiManager.prototype = {
-        addEventListener: function () {
+        addEventListeners: function () {
             this.elements.activeBtn.addEventListener('click', ()=>{
                 this.setFilterBtnActive(this.elements.activeBtn);
                 this.renderFilteredItems(this.elements.activeBtn);
@@ -46,6 +45,48 @@ localStorage.clear();
             this.elements.showAll.addEventListener('click', ()=>{
                 this.setFilterBtnActive(this.elements.showAll);
                 this.renderFilteredItems(this.elements.showAll);
+            })
+        },
+        keyboardNav: function () {
+            document.addEventListener('keydown', (e)=>{
+                const item = Array.from(document.querySelectorAll('.tabItem'));
+                const target = e.target;
+                const index = item.indexOf(target);
+                if(!item.includes(target))return;
+                switch (e.key) {
+                    case 'Enter':
+                    case ' ':
+                        e.preventDefault();
+                        if (target === this.elements.activeBtn) {
+                                this.setFilterBtnActive(this.elements.activeBtn);
+                                this.renderFilteredItems(this.elements.activeBtn);
+                            } else if(target === this.elements.inactiveBtn){
+                                this.setFilterBtnActive(this.elements.inactiveBtn);
+                                this.renderFilteredItems(this.elements.inactiveBtn);
+                            } else if(target === this.elements.showAll){
+                                this.setFilterBtnActive(this.elements.showAll);
+                                this.renderFilteredItems(this.elements.showAll);
+                            } else if(target.classList.contains('remove-btn')){
+                                this.remove(target.dataset.id)
+                                console.log(target.dataset.id)
+                            } else if(target.classList.contains('switch-container')){
+                                this.toggleState(target.dataset.id)
+                                console.log(target.dataset.id);
+                            }
+                        break;
+                
+                    case 'ArrowDown':
+                        e.preventDefault();
+                            const nextIndex = (index + 1) % item.length;
+                            item[nextIndex].focus();
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                            const prevIndex = (index - 1 + item.length) % item.length;
+                            item[prevIndex].focus();
+                        break;
+                }
+                
             })
         },
         setFilterBtnActive: function (activeButton) {
@@ -81,9 +122,9 @@ localStorage.clear();
                         </div>
                         </article>
                         <article class="ext-actions">
-                        <button class="remove-btn" data-id="${item.description}">Remove</button>
-                        <div class="switch-container ${btnActiveToggle}">
-                        <div class="switch" ></div>
+                        <button class="remove-btn tabItem" data-id="${item.description}" tabindex="0">Remove</button>
+                        <div class="switch-container ${btnActiveToggle} tabItem" tabindex="0" data-id="${item.description}">
+                        <div class="switch"></div>
                         </div>
                     </article>
                 `;
@@ -112,14 +153,37 @@ localStorage.clear();
                 this.dataManager.saveData(allItems);
                 this.renderFilteredItems(document.querySelector('.states.state-active'));
             }
-        }
-    }
+        },
+        // handleModes: function() {
+        //     const toggleMode = document.getElementById('mode');
+        //     const root = document.documentElement;
+        //     function toggleManager() {
+        //         let theme = localStorage.getItem('theme');
+        //         if (!theme) {
+        //             theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        //         } root.setAttribute('data-theme', theme);
+        //         toggleMode.classList.add(theme)
+        //         localStorage.setItem('theme', theme)
 
-    // initialization
+        //         toggleMode.addEventListener('click', ()=>{
+        //             const curr = root.getAttribute('data-theme');
+        //             const next = curr === 'dark' ? 'light' : 'dark';
+        //             const classToggle = next === 'dark' ? 'dark' : 'light';
+        //             root.setAttribute('data-theme', next);
+        //             localStorage.setItem('theme', next)
+
+        //             toggleMode.classList.remove('dark', 'light');
+        //             toggleMode.classList.add(classToggle);
+        //         })
+        //     }
+
+        // }
+    }
     const dataManager = new DataManager('uiData', initialData);
-    const ui = new UiManager(dataManager)
-    ui.addEventListener()
-    ui.renderFilteredItems(ui.elements.showAll)
-    dataManager.initialize()
-    dataManager.getData()
+    const uiManager = new UiManager(dataManager);
+    dataManager.initialize();
+    uiManager.addEventListeners();
+    uiManager.keyboardNav();
+    uiManager.renderFilteredItems(uiManager.elements.showAll);
     toggleManager()
+    // uiManager.handleModes();

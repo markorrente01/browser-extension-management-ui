@@ -218,6 +218,11 @@ main{
     transform: translateX(calc(42px - 22px));
 }
 ///////////////////////////////////////////
+.tabItem:focus-visible {
+    outline: 2px solid v.$Red-500;
+    outline-offset: 2px;
+    border: none;      
+}
 @media screen and (max-width: 1024px) {
     .ext-grid-container{
     grid-template-columns: auto auto;

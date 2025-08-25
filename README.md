@@ -38,8 +38,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://browser-extension-management-ui.vercel.app/)
+- Solution URL: [solution](https://www.frontendmentor.io/solutions/oop-js-scss-74PGcoguBE)
+- Live Site URL: [Live site](https://browser-extension-management-ui.vercel.app/)
 
 ## My process
 HTML -----> CSS ------> JS
